@@ -14,7 +14,7 @@ import ca.sheridancollege.database.DatabaseAccess;
 /**
  * This class is to test the methods in DatabaseAccess.
  * 
- * @author Mihye 991617334
+ * @author Mihye
  */
 @SpringBootTest
 class TestDatabase {
