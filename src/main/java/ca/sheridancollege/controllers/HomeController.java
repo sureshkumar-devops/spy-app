@@ -20,7 +20,7 @@ import ca.sheridancollege.database.DatabaseAccess;
  * This is the controller that defines each of the pages.
  * Some methods utilize the session.
  * This program is made for Assignment 3 in Java 3 class.
- * @author Mihye 991617334
+ * @author Mihye 
  */
 @Controller
 public class HomeController {
