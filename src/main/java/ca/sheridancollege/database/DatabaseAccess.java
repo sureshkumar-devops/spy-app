@@ -13,7 +13,7 @@ import ca.sheridancollege.beans.Mission;
  * This is the database class. It includes the data and methods to manipulate
  * the data.
  * 
- * @author Mihye 991617334
+ * @author Mihye 
  */
 @Repository
 public class DatabaseAccess {
