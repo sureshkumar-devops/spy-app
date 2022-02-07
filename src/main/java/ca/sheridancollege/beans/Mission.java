@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * This class is for the beans and saves the field.
  * 
- * @author Mihye 991617334
+ * @author Mihye
  */
 @Data
 public class Mission {
