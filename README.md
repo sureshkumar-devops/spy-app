@@ -1,6 +1,6 @@
 # Spy App
 
-**Java-based full-stack web application.** Users can view or create missions for each agents. They can also edit/ delete missions.
+**Java-based Full-Stack Web Application.** Users can view or create missions for each agents. They can also edit/ delete missions.
 
 ## Technologies
 
