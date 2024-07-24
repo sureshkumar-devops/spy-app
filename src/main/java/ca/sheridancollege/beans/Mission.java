@@ -1,7 +1,6 @@
 package ca.sheridancollege.beans;
 
 import lombok.Data;
-
 /**
  * This class is for the beans and saves the field.
  * 

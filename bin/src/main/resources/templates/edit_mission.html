@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edit Mission</title>
+</head>
+<body>
+    <h1 th:text="|Edit a Mission for ${mission.agent}|">Edit a Mission for</h1>
+    <form action="#" th:action="@{/updateMission}" method="post" th:object="${mission}">
+
+	    <p>Mission title: <input type="text" th:field=*{title} required></p>
+	    
+	    <h2>Edit the gadgets</h2>
+	    Gadget 1: <input type="text" th:field="*{gadget1}"><br>
+	    Gadget 2: <input type="text" th:field="*{gadget2}"><br><br>
+	    <input type="hidden" th:field="*{id}">
+	    <input type="hidden" th:field="*{agent}">
+	    <input type="submit" value="Update Mission!">
+    </form>
+    <a href="/">Back to home</a>
+</body>
+</html>
