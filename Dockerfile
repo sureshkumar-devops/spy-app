@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11
-EXPOSE 8080
-ENV APP_HOME /urs/src/app
-COPY target/*.jar $APP_HOME/app.jar
+ENV APP_HOME /spy-app
 WORKDIR $APP_HOME
+COPY target/*.jar $APP_HOME/app.jar
+EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
