@@ -1,4 +1,6 @@
 FROM adoptopenjdk/openjdk11
+RUN addgroup project && suresh -S -G project suresh
+USER suresh
 ENV APP_HOME /spy-app
 WORKDIR $APP_HOME
 COPY target/*.jar $APP_HOME/app.jar
