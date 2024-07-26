@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: spy-deployment
+spec:
+  selector:
+    matchLabels:
+      app: spy
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: spy
+    spec:
+      containers:
+        - name: spy
+          image: lehardocker/spy-app-prod:latest # Image that will be used to containers in the cluster
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
+
+
+---
+
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: spy-ssvc
+spec:
+  type: LoadBalancer  
+  selector:
+    app: spy
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080 
+  type: LoadBalancer # type of the service.
