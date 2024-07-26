@@ -1,5 +1,5 @@
 FROM adoptopenjdk/openjdk11
-RUN addgroup docker && suresh -S -G docker suresh
+RUN sudo addgroup docker && suresh -S -G docker suresh
 USER suresh
 ENV APP_HOME /spy-app
 WORKDIR $APP_HOME
