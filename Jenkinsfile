@@ -78,7 +78,10 @@ pipeline
       {
         steps
         {
-            echo 'docker'
+            withDockerRegistry(CredentialsId:'cred-docker',toolName:'docker')
+            {
+                sh 'docker build -t lehardocker/spy-app-dev:latest .'
+            }
         }
       }
 
