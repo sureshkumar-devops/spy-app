@@ -89,6 +89,39 @@ pipeline
             }
         } 
       }
+      stage('Trivy Image Scan')
+      {
+         steps
+         {
+            sh 'trivy image --format table -o trivy-imagescan-report.html lehardocker/spy-app-dev:latest'
+         }
+      }
+      stage('Publish to DockerHub')
+      {
+        steps
+        {
+            script
+            {
+              withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker')
+              {
+                 sh 'docker push lehardocker/spy-app-dev:latest'
+              }
+            }
+        } 
+      }
+      stage('Deploy to Container')
+      {
+        steps
+        {
+            script
+            {
+              withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker')
+              {
+                 sh 'docker run -d -it -p 5000:8080 --name spy-app-dev-container lehardocker/spy-app-dev:latest'
+              }
+            }
+        } 
+      }
     }
     post
     {
