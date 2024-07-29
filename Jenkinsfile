@@ -45,9 +45,7 @@ pipeline
       stage('SonarQube Analysis')
       {
         steps
-        {
-            //withSonarQubeEnv(sonar-server)
-            {
+        {            
             withSonarQubeEnv(credentialsId: 'cred-sonar-token')
             {
                 sh ''' $SCANNER_HOME/bin/sonar-scanner\
