@@ -71,7 +71,9 @@ pipeline
         steps
         {
             withMaven(globalMavenSettingsConfig: 'maven-settings',jdk: 'JAVA_HOME',maven:'MAVEN_HOME',mavenSettingsConfig: '',traceability:true)
-            sh 'mvn deploy -DskipTests=true'
+            {
+              sh 'mvn deploy -DskipTests=true'
+            }
         }
       }
       stage('Build Image & Tag')
@@ -87,7 +89,6 @@ pipeline
             }
         } 
       }
-
     }
     post
     {
