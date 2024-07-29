@@ -10,6 +10,10 @@ pipeline
     {
         SCANNER_HOME= tool 'sonar-scanner'
     }
+    triggers 
+    {
+        pollSCM('* * * * *') 
+    }
     stages
     {
       stage('Git-CheckOut')
@@ -46,7 +50,7 @@ pipeline
       {
         steps
         {            
-            withSonarQubeEnv(sonar-server)
+            withSonarQubeEnv('sonar-server')
             {
                 sh '''$SCANNER_HOME/bin/sonar-scanner\
                 -Dsonar.projectName=SpyApp-Dev\
