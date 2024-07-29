@@ -8,7 +8,7 @@ pipeline
     }
     environment
     {
-        SCANNER_HOME= tool 'sonar-scanner'
+        SCANNER_HOME: tool 'sonar-scanner'
     }
     stages
     {
@@ -46,7 +46,7 @@ pipeline
       {
         steps
         {            
-            withSonarQubeEnv(credentialsId: 'cred-sonar-token')
+            withSonarQubeEnv(sonar-server)
             {
                 sh '''$SCANNER_HOME/bin/sonar-scanner\
                 -Dsonar.projectName=SpyApp-Dev\
