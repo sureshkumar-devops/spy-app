@@ -59,6 +59,29 @@ pipeline
             }
         }
       }
+      stage('Build Application')
+      {
+        steps
+        {
+            sh 'mvn package -DskipTests=true'
+        }
+      }
+      stage('Artifact to Nexus Repo')
+      {
+        steps
+        {
+            withMaven(globalMavenSettingsConfig: 'maven-settings',jdk: 'JAVA_HOME',maven:'MAVEN_HOME',mavenSettingsConfig: '',traceability:true)
+            sh 'mvn deploy -DskipTests=true'
+        }
+      }
+      stage('Build Image & Tag')
+      {
+        steps
+        {
+            echo 'docker'
+        }
+      }
+
     }
     post
     {
