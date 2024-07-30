@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spy
-          image: lehardocker/spy-app-prod:latest 
+          image: lehardocker/spy-app-dev:latest 
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
