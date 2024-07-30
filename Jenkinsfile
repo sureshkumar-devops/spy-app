@@ -122,6 +122,13 @@ pipeline
             }
         } 
       }
+      stage('Deploy to K8s')
+      {
+        steps
+        {
+            sh 'echo deploy to k8s'
+        } 
+      }
     }
     post
     {
