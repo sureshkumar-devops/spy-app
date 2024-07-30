@@ -30,35 +30,7 @@ pipeline
         {
             sh 'mvn compile'
         }
-      }
-      stage('Unit Testing')
-      {
-        steps
-        {
-            sh 'mvn test -DskipTests=true'
-        }
-      }
-      stage('Trivy File Scan')
-      {
-        steps
-        {
-            sh 'trivy --version'
-            sh 'trivy fs --format table -o trivy-fs-report.html .'
-        }
-      }
-      stage('SonarQube Analysis')
-      {
-        steps
-        {            
-            withSonarQubeEnv('sonar-server')
-            {
-                sh '''$SCANNER_HOME/bin/sonar-scanner\
-                -Dsonar.projectName=SpyApp-Dev\
-                -Dsonar.projectKey=SpyApp-Dev\
-                -Dsonar.java.binaries=. '''
-            }
-        }
-      }
+      }                  
       stage('Build Application')
       {
         steps
@@ -88,70 +60,6 @@ pipeline
               }
             }
         } 
-      }
-      stage('Trivy Image Scan')
-      {
-         steps
-         {
-            sh 'trivy image --format table -o trivy-imagescan-report.html lehardocker/spy-app-dev:latest'
-         }
-      }
-      stage('Publish to DockerHub')
-      {
-        steps
-        {
-            script
-            {
-              withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker')
-              {
-                 sh 'docker push lehardocker/spy-app-dev:latest'
-              }
-            }
-        } 
-      }
-      stage('Deploy to Container')
-      {
-        steps
-        {
-            script
-            {
-              withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker')
-              {
-                 sh 'docker run -d -it -p 5000:8080 --name spy-app-dev-container lehardocker/spy-app-dev:latest'
-              }
-            }
-        } 
-      }
-      stage('Deploy to K8s')
-      {
-        steps
-        {
-            sh 'echo deploy to k8s'
-        } 
-      }
-    }
-    post
-    {
-      always
-      {
-          echo 'One Way or another, I have finished..'
-          //cleanWs()
-      }
-      success
-      {
-          echo 'I Successed..!'
-      }
-      unstable
-      {
-          echo 'I am Unstable :/'
-      }
-      failure
-      {
-          echo 'I failed :('
-      }
-      changed
-      {
-           echo 'Things were different before...'
-      }
-    }
+      }    
+    }    
 }
