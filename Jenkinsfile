@@ -1,3 +1,4 @@
+
 pipeline
 {
     agent any
@@ -121,6 +122,52 @@ pipeline
               }
             }
         } 
-      } 
+      }
+      stage('Deploy to K8s')
+      {
+        steps
+        {
+           withKubeConfig(caCertificate: '', clusterName: ' kind-spy-cluster', contextName: ' kind-spy-cluster', credentialsId: 'cred-k8-token-kind', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: ' https://127.0.0.1:42387') 
+           {
+                sh 'kubectl apply -f deployment-service.yaml'
+                sh sleep(60)
+           }
+        } 
+      }
+      stage('Verify to K8s')
+      {
+        steps
+        {
+           withKubeConfig(caCertificate: '', clusterName: ' kind-spy-cluster', contextName: ' kind-spy-cluster', credentialsId: 'cred-k8-token-kind', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: ' https://127.0.0.1:42387') 
+           {
+                sh 'kubectl get pods -n webapps'
+                sh 'kubectl get svc -n webapps'
+           }
+        } 
+      }
+    }
+    post
+    {
+      always
+      {
+          echo 'One Way or another, I have finished..'
+          //cleanWs()
+      }
+      success
+      {
+          echo 'I Successed..!'
+      }
+      unstable
+      {
+          echo 'I am Unstable :/'
+      }
+      failure
+      {
+          echo 'I failed :('
+      }
+      changed
+      {
+           echo 'Things were different before...'
+      }
     }
 }
