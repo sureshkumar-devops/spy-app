@@ -81,8 +81,8 @@ pipeline
         steps
         {
             script
-            {
-              withDockerRegistry(credentialsId: 'cred-docker1', toolName: 'docker')
+            { 
+              withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker')
               {
                  sh 'docker build -t lehardocker/spy-app-dev:latest .'
               }
@@ -102,7 +102,7 @@ pipeline
         {
             script
             {
-              withDockerRegistry(credentialsId: 'cred-docker1', toolName: 'docker')
+              withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker')
               {
                  sh 'docker push lehardocker/spy-app-dev:latest'
               }
@@ -115,7 +115,7 @@ pipeline
         {
             script
             {
-              withDockerRegistry(credentialsId: 'cred-docker1', toolName: 'docker')
+              withDockerRegistry(credentialsId: 'cred-docker', toolName: 'docker')
               {
                  sh 'docker run -d -it -p 5000:8080 --name spy-app-dev-container lehardocker/spy-app-dev:latest'
               }
