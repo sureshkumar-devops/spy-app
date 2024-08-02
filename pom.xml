@@ -49,7 +49,7 @@
 		        <groupId>org.javassist</groupId>
   			<artifactId>javassist</artifactId>
 			<version>3.20.0-GA</version>
-		</dependency>
+		</dependency>		
 	</dependencies>
 <distributionManagement>
         <repository>
@@ -75,6 +75,10 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+
+
+			
 		</plugins>
 	</build>
 
